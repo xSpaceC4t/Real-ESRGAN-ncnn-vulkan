@@ -306,5 +306,8 @@ if(OPENMP_FOUND)
     list(APPEND REALESRGAN_LINK_LIBRARIES ${OpenMP_CXX_LIBRARIES})
 endif()
 
-target_link_libraries(realesrgan-ncnn-vulkan ${REALESRGAN_LINK_LIBRARIES} -static-libstdc++)
-
+if(ANDROID)
+    target_link_libraries(realesrgan-ncnn-vulkan ${REALESRGAN_LINK_LIBRARIES} -landroid -llog)
+else()
+    target_link_libraries(realesrgan-ncnn-vulkan ${REALESRGAN_LINK_LIBRARIES} -static-libstdc++)
+endif()
